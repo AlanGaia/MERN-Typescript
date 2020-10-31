@@ -1,0 +1,27 @@
+{
+  "name": "MERN-Typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlanGaia/MERN-Typescript.git"
+  },
+  "keywords": [],
+  "author": "Alan Gaia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlanGaia/MERN-Typescript/issues"
+  },
+  "homepage": "https://github.com/AlanGaia/MERN-Typescript#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.11",
+    "morgan": "^1.10.0"
+  }
+}
