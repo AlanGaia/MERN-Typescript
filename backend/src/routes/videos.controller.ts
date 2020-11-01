@@ -36,7 +36,7 @@ export const createVideo: RequestHandler = async (req, res) => {
 
 export const updateVideo: RequestHandler = async (req, res) => {
   if (isValidObjectId(req.params.id)){
-    const videoUpdated = await Video.findByIdAndUpdate(req.params.id, req.body);
+    const videoUpdated = await Video.findByIdAndUpdate(req.params.id, req.body, {new: true});
     if (!videoUpdated) {
       return res.json({message: "didn't match video"}).status(204);
     }
