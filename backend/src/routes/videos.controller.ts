@@ -34,8 +34,16 @@ export const createVideo: RequestHandler = async (req, res) => {
   res.json(savedVideo);
 }
 
-export const updateVideo: RequestHandler = (req, res) => {
-  res.json('updating video')
+export const updateVideo: RequestHandler = async (req, res) => {
+  if (isValidObjectId(req.params.id)){
+    const videoUpdated = await Video.findByIdAndUpdate(req.params.id, req.body);
+    if (!videoUpdated) {
+      return res.json({message: "didn't match video"}).status(204);
+    }
+    return res.json(videoUpdated)
+  }
+  return res.json({message: "wrong id - bad request"}).status(400);
+
 }
 
 export const deleteVideo: RequestHandler = async (req, res) => {
