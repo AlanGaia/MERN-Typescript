@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios' // -> Get the data
 import {Video} from './Video' // -> Interface VIDEO MODEL
+import * as videoService from './VideoServices'
 
 
 const VideosList = () => {
 
-  //Array of videos
+  //State videos[] - Video interface -
   const [videos, setVideos] = useState<Video[]>([]);
 
-  //Get videos from backend
   const getAllVideos = async () => {
-    const response = await axios.get('http://localhost:8080/videos')
-    setVideos(response.data);       
+    const res = await videoService.getVideos();
+    setVideos(res.data);
   }
 
   useEffect(() => {
