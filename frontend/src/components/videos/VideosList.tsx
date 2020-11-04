@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {Video} from './Video' // -> Interface VIDEO MODEL
 import * as videoService from './VideoServices'
+import VideoItem from './VideoItem';
 
 
 const VideosList = () => {
@@ -20,9 +21,7 @@ const VideosList = () => {
   return (
     <div>
         {videos.map(video => {
-          return <div>
-            <h1>{video.title}</h1>
-          </div>
+          return <VideoItem video={video} key={video._id}/>
         })}
     </div>
   )
