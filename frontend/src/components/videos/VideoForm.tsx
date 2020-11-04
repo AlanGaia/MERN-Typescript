@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import {Video} from './Video'
+import {Video} from './Video';
+import * as VideoService from './VideoServices'
 
 type InputChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
@@ -15,9 +16,12 @@ const VideoForm = () => {
     setVideo({...video, [e.target.name]: e.target.value})
   }
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(video);
+    const res = await VideoService.createVideo(video);
+    console.log(res);
+    
+    
   }
 
   return (
