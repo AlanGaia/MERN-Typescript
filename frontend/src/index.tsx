@@ -14,11 +14,15 @@ ReactDOM.render(
     <BrowserRouter>
 
     <Navbar/>
-
+    
+    <div className="container p-4">
       <Switch>
         <Route exact path="/" component={VideosList}/>
         <Route path="/new-video" component={VideoForm}/>
       </Switch>
+    </div>
+
+  
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

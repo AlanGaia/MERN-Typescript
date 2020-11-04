@@ -1,8 +1,10 @@
 export interface Video {
+  //Required 
   title: string;
-  _id: string;
   url: string;
   description: string;
-  createdAt: string;
-  updatedAt: string;
+  //Optional -> (generated in database)
+  _id?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
