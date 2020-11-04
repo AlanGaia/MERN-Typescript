@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bootswatch/dist/cosmo/bootstrap.min.css'
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
