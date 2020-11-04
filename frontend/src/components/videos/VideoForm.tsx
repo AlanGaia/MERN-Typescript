@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
+import {toast} from "react-toastify/";
 import {Video} from './Video';
 import * as VideoService from './VideoServices'
 
@@ -6,11 +7,13 @@ type InputChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 const VideoForm = () => {
 
-  const [video, setVideo] = useState<Video>({
+  const initialState = {
     title: '',
     url: '',
     description:''
-  })
+  }
+
+  const [video, setVideo] = useState<Video>(initialState);
 
   const handleInputChange = (e: InputChange) => {
     setVideo({...video, [e.target.name]: e.target.value})
@@ -19,9 +22,10 @@ const VideoForm = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const res = await VideoService.createVideo(video);
-    console.log(res);
-    
-    
+    if(res.status === 200){
+      toast.success('New video created');
+    }
+    setVideo(initialState);
   }
 
   return (
@@ -40,6 +44,7 @@ const VideoForm = () => {
                   placeholder="Title of video"
                   className="form-control"
                   onChange={handleInputChange}
+                  value={video.title}
                   autoFocus
                 />
               </div>
@@ -52,6 +57,7 @@ const VideoForm = () => {
                   placeholder="Example: https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                   className="form-control"
                   onChange={handleInputChange}
+                  value={video.url}
                 />
               </div>
 
@@ -63,6 +69,7 @@ const VideoForm = () => {
                   className="form-control"
                   placeholder="Write a description of the video here"
                   onChange={handleInputChange}
+                  value={video.description}
                 ></textarea>
               </div>
 

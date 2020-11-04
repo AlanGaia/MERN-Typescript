@@ -1,11 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
+
+//tools
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {ToastContainer} from 'react-toastify';
+
+//Components
 import VideosList from './components/videos/VideosList';
 import VideoForm from './components/videos/VideoForm';
 import Navbar from './components/navbar/Navbar';
 
+//Css
+import 'react-toastify/dist/ReactToastify.css';
 import 'bootswatch/dist/cosmo/bootstrap.min.css'
 import './index.css';
 
@@ -14,12 +21,13 @@ ReactDOM.render(
     <BrowserRouter>
 
     <Navbar/>
-    
+
     <div className="container p-4">
       <Switch>
         <Route exact path="/" component={VideosList}/>
         <Route path="/new-video" component={VideoForm}/>
       </Switch>
+      <ToastContainer />
     </div>
 
   
