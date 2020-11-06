@@ -2,10 +2,17 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import {toast} from "react-toastify/";
 import {Video} from './Video';
 import * as VideoService from './VideoServices'
+import {useParams} from 'react-router-dom';
+
+interface Params  {
+  id: string;
+}
 
 type InputChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 const VideoForm = () => {
+
+  const params = useParams<Params>();
 
   const initialState = {
     title: '',
@@ -73,9 +80,14 @@ const VideoForm = () => {
                 ></textarea>
               </div>
 
-              <button type="submit" className="btn btn-primary">
-                Create new video
-              </button>
+
+              {
+                params.id ? (
+                  <button type="submit" className="btn btn-warning">Update video</button>
+                ) : (
+                  <button type="submit" className="btn btn-primary">Create new video</button>
+                )
+              }
 
             </form>
           </div>

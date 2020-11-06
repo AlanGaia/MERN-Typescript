@@ -26,6 +26,7 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/" component={VideosList}/>
         <Route path="/new-video" component={VideoForm}/>
+        <Route path="/update/:id" component={VideoForm}/>
       </Switch>
       <ToastContainer />
     </div>
