@@ -5,6 +5,6 @@ export interface Video {
   description: string;
   //Optional -> (generated in database)
   _id?: string;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt?: string | Date;
+  updatedAt?: string | Date;
 }
