@@ -23,3 +23,7 @@ export const updateVideo = async (id: string, video: Video) => {
   return await axios.put(`${API}/videos/${id}`, video);
 }
 
+//Delete 1 video from backend by id
+export const deleteVideo = async (id: string) => {
+  return await axios.delete<Video>(`${API}/videos/${id}`);
+}
