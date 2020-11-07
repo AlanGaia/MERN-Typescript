@@ -1,8 +1,8 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState, useEffect } from "react";
 import {toast} from "react-toastify/";
 import {Video} from './Video';
 import * as VideoService from './VideoServices'
-import {useParams} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 
 interface Params  {
   id: string;
@@ -11,29 +11,56 @@ interface Params  {
 type InputChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 const VideoForm = () => {
+  
+  const history = useHistory();
 
   const params = useParams<Params>();
 
+  //Initial State Video
   const initialState = {
     title: '',
     url: '',
     description:''
   }
 
+  //State Video
   const [video, setVideo] = useState<Video>(initialState);
 
+  //Handle input change
   const handleInputChange = (e: InputChange) => {
     setVideo({...video, [e.target.name]: e.target.value})
   }
 
+  //Handle Submit Form
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await VideoService.createVideo(video);
-    if(res.status === 200){
+
+    if(!params.id){
+      //Create new Video
+      await VideoService.createVideo(video);
       toast.success('New video created');
+      setVideo(initialState);
+    } else {
+      //Update Video
+      const res = await VideoService.updateVideo(params.id, video);
+      if (res.status === 200) toast.success('Video Updated');
+      setVideo(initialState);
+      history.push('/');
     }
-    setVideo(initialState);
+
+
   }
+
+  const getVideo = async (id: string) => {
+    const res = await VideoService.getVideo(id);
+    const {title, description, url } = res.data;
+    setVideo({title, description, url});
+  }
+
+  //UseEffect update data
+  useEffect(() => {
+    if (params.id)  getVideo(params.id);
+  }, [params.id]);
 
   return (
     <div className="row">
